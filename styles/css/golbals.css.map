@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CACJ,IAAI,AAAC,CACJ,OAAO,CAAE,CAAC,CACV,MAAM,CAAE,CAAC,CACT,WAAW,CAAE,yBAAyB,CACtC,AAED,AAAA,CAAC,AAAC,CACD,UAAU,CAAE,UAAU,CACtB",
+    "sources": [
+        "../golbals.scss"
+    ],
+    "names": [],
+    "file": "golbals.css"
+}
