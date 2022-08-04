@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Context } from '../lib/Context'
+import LinkButton from './LinkButton'
 import {
 	Article,
 	Data,
@@ -15,8 +16,9 @@ import {
 	Badge,
 } from './commentStyles'
 
-export default function Comment({ comment, user }) {
-	const { setReply } = useContext(Context)
+export default function Comment({ comment }) {
+	const { currentUser, setReply } = useContext(Context)
+
 	const {
 		id,
 		score,
@@ -29,45 +31,53 @@ export default function Comment({ comment, user }) {
 		content,
 	} = comment
 
-	const isUser = username === user
+	const isUser = username === currentUser.username
 
 	const replyToComment = event => {
 		const parentId = +event.target.closest('section').dataset.parentId || id
 		setReply({ parentId, commentId: id })
 	}
 
+	const editComment = event => {
+		return
+	}
+
+	const deleteComment = event => {
+		return
+	}
+
 	return (
 		<Article data-comment-id={id}>
 			<Score>
-				<ScoreBtn>+</ScoreBtn>
+				<ScoreBtn>
+					<img src='./images/icon-plus.svg' alt='upvote' />
+				</ScoreBtn>
 				{score}
-				<ScoreBtn>-</ScoreBtn>
+				<ScoreBtn>
+					<img src='./images/icon-minus.svg' alt='downvote' />
+				</ScoreBtn>
 			</Score>
-			<Data>
-				<Header>
-					<HeaderData>
-						<Image src={image} alt={username} />
-						<User>
-							{username} {isUser && <Badge>you</Badge>}
-						</User>
-						<span>{createdAt}</span>
-					</HeaderData>
-					<Buttons>
-						{isUser ? (
-							<>
-								<LinkBtn>Delete</LinkBtn>
-								<LinkBtn primary>Edit</LinkBtn>
-							</>
-						) : (
-							<LinkBtn onClick={replyToComment}>Reply</LinkBtn>
-						)}
-					</Buttons>
-				</Header>
-				<Content>
-					<span>{replyingTo ? `@${replyingTo} ` : ''}</span>
-					{content}
-				</Content>
-			</Data>
+			<Header>
+				<Image src={image} alt={username} />
+				<User>
+					{username} {isUser && <Badge>you</Badge>}
+				</User>
+				<span>{createdAt}</span>
+			</Header>
+			<Buttons>
+				{isUser ? (
+					<>
+						<LinkButton handler={deleteComment} action='delete' />
+						<LinkButton handler={editComment} primary action='edit' />
+					</>
+				) : (
+					<LinkButton handler={replyToComment} primary action='reply' />
+				)}
+			</Buttons>
+			<Content>
+				<span>{replyingTo ? `@${replyingTo} ` : ''}</span>
+				{content}
+			</Content>
 		</Article>
 	)
 }

@@ -18,8 +18,8 @@ export default function Home({ data }) {
 	return (
 		<div className={styles.container}>
 			<Head>
-				<title>Interactive Comments - Frontend Mentor challenge</title>
 				<link rel='icon' href='/images/favicon-32x32.png' />
+				<title>Interactive Comments - Frontend Mentor challenge</title>
 			</Head>
 
 			<header className={styles.header}>

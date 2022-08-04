@@ -1,11 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+:root {
+	/* primary colors*/
+	--moderateBlue: hsl(238, 40%, 52%);
+	--softRed: hsl(358, 79%, 66%);
+	--lightGrayishBlue: hsl(239, 57%, 85%);
+	--paleRed: hsl(357, 100%, 86%);
+
+	/* neutral colors*/
+	--darkBlue: hsl(212, 24%, 26%);
+	--grayishBlue: hsl(211, 10%, 45%);
+	--lightGray: hsl(223, 19%, 93%);
+	--veryLightGray: hsl(228, 33%, 97%);
+	--white: hsl(0, 0%, 100%);
+
+	/* font-family*/
+	--primaryFont: 'Rubik', sans-serif;
+
+	/* attribution */
+	--attribution-font-family: 'Rubik', sans-serif;
+	--attribution-text-color: hsl(211, 10%, 45%);
+	--attribution-link-color: hsl(238, 40%, 52%);
+}
+
 html,
 body {
-	padding: 0;
-	margin: 0;
-	font-family: -apple-system, sans-serif;
-	background: rgba(0, 0, 0, 0.05);
+	background: var(--veryLightGray);
 }
 
 * {
+	padding: 0;
+	margin: 0;
 	box-sizing: border-box;
+	font-family: var(--primaryFont);
+	font-size: 16px;
+	font-weight: 400;
 }
+

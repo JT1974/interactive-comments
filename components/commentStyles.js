@@ -1,86 +1,98 @@
 import styled from 'styled-components'
 
 const Article = styled.article`
-	display: flex;
-	align-items: flex-start;
-	gap: 1.5rem;
-	background: white;
-	border-radius: 0.5rem;
-	padding: 1.5rem;
-`
-const Data = styled.div`
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+	display: grid;
 	gap: 1rem;
+	background: var(--white);
+	border-radius: 0.5rem;
+	padding: 1rem;
 `
 const Header = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-`
-const HeaderData = styled.div`
+	grid-area: 1/1/2/4;
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--grayishBlue);
 `
 const Image = styled.img`
 	width: 2rem;
+
+	@media screen and (min-width: 48rem) {
+		width: 2.5rem;
+	}
 `
 const User = styled.div`
-	font-weight: bold;
-	color: rgba(0, 0, 0, 0.85);
+	font-weight: 500;
+	color: var(--darkBlue);
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 `
 const Buttons = styled.div`
+	grid-area: 3/3/4/4;
 	display: flex;
 	gap: 1rem;
 `
 const Content = styled.div`
-	color: rgba(0, 0, 0, 0.5);
+	grid-area: 2/1/3/4;
+	color: var(--grayishBlue);
+	line-height: 1.5;
 
 	span {
-		font-weight: bold;
-		color: blue;
+		font-weight: 500;
+		color: var(--moderateBlue);
 	}
 `
 const Score = styled.div`
+	grid-area: 3/1/4/2;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 0.5rem;
-	color: blue;
-	font-weight: bold;
-	background: rgba(0, 0, 0, 0.05);
-	padding: 0.4rem;
+	gap: 1rem;
+	color: var(--moderateBlue);
+	font-weight: 500;
+	background: var(--lightGray);
+	padding: 0.5rem 1rem;
 	border-radius: 0.5rem;
 `
 const ScoreBtn = styled.button`
 	border: none;
 	background: transparent;
-	color: rgba(0, 0, 0, 0.25);
-	font-size: 1rem;
-	font-weight: bold;
+	display: flex;
+
+	img:hover + path {
+		fill: var(--moderateBlue);
+	}
 `
 const LinkBtn = styled.button`
 	border: none;
 	background: transparent;
-	color: ${props => (props.primary ? 'blue' : 'red')};
+	color: ${props => (props.primary ? 'var(--moderateBlue)' : 'var(--softRed)')};
 	font-size: 1rem;
-	font-weight: bold;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+
+	path {
+		fill: ${props => (props.primary ? 'var(--moderateBlue)' : 'var(--softRed)')};
+	}
+
+	&:hover {
+		color: ${props => (props.primary ? 'var(--lightGrayishBlue)' : 'var(--paleRed)')};
+
+		path {
+			fill: ${props => (props.primary ? 'var(--lightGrayishBlue)' : 'var(--paleRed)')};
+		}
+	}
 `
 const Badge = styled.span`
-	padding: 1px 5px 3px 5px;
+	padding: 0 6px 4px;
 	border-radius: 2px;
-	background: blue;
-	color: white;
-	font-size: 0.75rem;
-	font-weight: bold;
-	line-height: 1;
+	background: var(--moderateBlue);
+	color: var(--white);
+	font-size: 0.8rem;
+	font-weight: 500;
 `
-export { Article, Data, Header, HeaderData, Image, User, Buttons, Content, Score, ScoreBtn, LinkBtn, Badge }
+export { Article, Header, Image, User, Buttons, Content, Score, ScoreBtn, LinkBtn, Badge }
 

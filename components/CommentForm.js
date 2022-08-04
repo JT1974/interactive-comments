@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { Context } from '../lib/Context'
 import Fetcher from '../lib/fetcher'
-import { getNextId } from '../lib/utils'
+import { getNextId, getComments } from '../lib/utils'
 import { Section, Image, Form, TextArea, Button } from './commentFormStyles'
 
 export default function CommentForm() {
@@ -9,14 +9,11 @@ export default function CommentForm() {
 	const [comment, setComment] = useState('')
 
 	// if it's a reply (it has parentId & commentId), insert the original comment's username to the beginning of the reply
-	useEffect(() => {
-		if (reply) {
-			setComment(`@${comments.find(comment => (comment.id = +reply.commentId)).user.username}, `)
-		}
-	}, [])
+	const replyTo = reply ? `@${getComments(comments)?.find(cm => cm.id === +reply.commentId).user.username}, ` : ''
 
 	const handleChange = event => {
-		setComment(event.target.value)
+		const cmtWoReplyTo = event.target.value.slice(replyTo.length)
+		setComment(cmtWoReplyTo)
 	}
 
 	// save comment document to the comments collection of the database
@@ -41,7 +38,7 @@ export default function CommentForm() {
 		event.preventDefault()
 
 		const parent = comments.find(cmt => cmt.id === +reply.parentId)
-		const replyingTo = comments.find(cmt => cmt.id === +reply.commentId).user.username
+		const replyingTo = getComments(comments).find(cmt => cmt.id === +reply.commentId).user.username
 
 		const data = await Fetcher(`/api/comments/${+reply.parentId}`, 'PATCH', {
 			...parent,
@@ -68,9 +65,9 @@ export default function CommentForm() {
 
 	return (
 		<Section>
-			<Image src={currentUser?.image.webp} alt={currentUser?.username} />
 			<Form onSubmit={reply ? replyComment : postComment}>
-				<TextArea onChange={handleChange} value={comment} />
+				<Image src={currentUser?.image.webp} alt={currentUser?.username} />
+				<TextArea onChange={handleChange} value={`${replyTo}${comment}`} />
 				<Button>{reply ? 'REPLY' : 'SEND'}</Button>
 			</Form>
 		</Section>
