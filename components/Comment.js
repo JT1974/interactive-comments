@@ -17,7 +17,7 @@ import {
 } from './commentStyles'
 
 export default function Comment({ comment }) {
-	const { currentUser, setReply } = useContext(Context)
+	const { currentUser, setReply, setDel } = useContext(Context)
 
 	const {
 		id,
@@ -42,8 +42,8 @@ export default function Comment({ comment }) {
 		return
 	}
 
-	const deleteComment = event => {
-		return
+	const deleteComment = () => {
+		setDel({ commentId: id })
 	}
 
 	return (

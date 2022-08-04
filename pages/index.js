@@ -6,9 +6,10 @@ import Fetcher from '../lib/fetcher'
 import Attribution from '../components/Attribution'
 import CommentForm from '../components/CommentForm'
 import Comments from '../components/Comments'
+import Modal from '../components/Modal'
 
 export default function Home({ data }) {
-	const { setCurrentUser, setComments, reply } = useContext(Context)
+	const { setCurrentUser, setComments, reply, del } = useContext(Context)
 
 	useEffect(() => {
 		setCurrentUser(data.currentUser)
@@ -32,6 +33,7 @@ export default function Home({ data }) {
 				<Comments />
 				{!reply && <CommentForm />}
 			</main>
+			{del && <Modal />}
 		</div>
 	)
 }
