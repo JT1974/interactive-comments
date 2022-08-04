@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 	// meg kell nézni, hogy mi a legfelsőbb szintű felmenője és azt kell update-elni!!!
 
 	const response = await fetch(`http://localhost:3001/comments/${id}`, {
-		method: 'PATCH',
+		method: req.method,
 		headers: {
 			'Content-Type': 'application/json',
 		},
