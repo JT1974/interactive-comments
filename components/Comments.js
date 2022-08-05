@@ -10,7 +10,7 @@ export default function Comments() {
 	const { comments, reply } = useContext(Context)
 
 	return (
-		<Section>
+		<Section id='comments'>
 			{comments ? (
 				comments.map(comment => {
 					return (

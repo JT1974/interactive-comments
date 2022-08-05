@@ -31,6 +31,7 @@ const User = styled.div`
 const Buttons = styled.div`
 	grid-area: 3/3/4/4;
 	display: flex;
+	justify-content: flex-end;
 	gap: 1rem;
 `
 const Content = styled.div`
@@ -45,6 +46,7 @@ const Content = styled.div`
 `
 const Score = styled.div`
 	grid-area: 3/1/4/2;
+	width: max-content;
 	display: flex;
 	justify-content: center;
 	align-items: center;

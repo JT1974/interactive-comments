@@ -1,20 +1,7 @@
 import { useContext } from 'react'
 import { Context } from '../lib/Context'
 import LinkButton from './LinkButton'
-import {
-	Article,
-	Data,
-	Header,
-	HeaderData,
-	Image,
-	User,
-	Buttons,
-	Content,
-	Score,
-	ScoreBtn,
-	LinkBtn,
-	Badge,
-} from './commentStyles'
+import { Article, Header, Image, User, Buttons, Content, Score, ScoreBtn, Badge } from './commentStyles'
 
 export default function Comment({ comment }) {
 	const { currentUser, setReply, setDel } = useContext(Context)

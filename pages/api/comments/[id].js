@@ -5,9 +5,6 @@ export default async function handler(req, res) {
 	// TODO: megtisztítani az inputot, nehogy scriptet küldjenek
 	const { id } = req.query
 
-	//DEBUG
-	console.log(id)
-
 	// NOTE: ha replies tömbbeli az id, akkor így nem találja meg
 	// meg kell nézni, hogy mi a legfelsőbb szintű felmenője és azt kell update-elni!!!
 
@@ -16,7 +13,7 @@ export default async function handler(req, res) {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ ...req.body }),
+		body: req.body && JSON.stringify({ ...req.body }),
 	})
 
 	const comments = await response.json()
