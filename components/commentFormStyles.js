@@ -32,6 +32,7 @@ const TextArea = styled.textarea.attrs(() => ({
 	color: var(--grayishBlue);
 	resize: none;
 	font-family: var(--primaryFont);
+	line-height: 1.5;
 	cursor: pointer;
 	outline: transparent;
 
@@ -44,21 +45,5 @@ const TextArea = styled.textarea.attrs(() => ({
 		cursor: text;
 	}
 `
-const Button = styled.button.attrs(() => ({
-	type: 'submit',
-}))`
-	grid-area: 2/2/3/3;
-	border: none;
-	border-radius: 0.5rem;
-	background: var(--moderateBlue);
-	color: var(--white);
-	padding: 1rem 0;
-	font-weight: 500;
-	cursor: pointer;
-
-	&:hover {
-		background: var(--lightGrayishBlue);
-	}
-`
-export { Section, Image, Form, TextArea, Button }
+export { Section, Image, Form, TextArea }
 

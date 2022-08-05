@@ -1,12 +1,4 @@
 import styled from 'styled-components'
-
-const Article = styled.article`
-	display: grid;
-	gap: 1rem;
-	background: var(--white);
-	border-radius: 0.5rem;
-	padding: 1rem;
-`
 const Header = styled.div`
 	grid-area: 1/1/2/4;
 	display: flex;
@@ -42,6 +34,32 @@ const Content = styled.div`
 	span {
 		font-weight: 500;
 		color: var(--moderateBlue);
+	}
+`
+const ContentUpdate = styled.textarea.attrs(() => ({
+	name: 'commentUpdate',
+}))`
+	grid-area: 2/1/3/4;
+	width: 100%;
+	min-height: 7rem;
+	height: auto;
+	padding: 1rem 1.5rem;
+	border: 1px solid var(--lightGray);
+	border-radius: 0.5rem;
+	color: var(--grayishBlue);
+	resize: none;
+	font-family: var(--primaryFont);
+	line-height: 1.5;
+	cursor: pointer;
+	outline: transparent;
+
+	&:hover,
+	&:focus {
+		border-color: var(--darkBlue);
+	}
+
+	&:focus {
+		cursor: text;
 	}
 `
 const Score = styled.div`
@@ -96,5 +114,5 @@ const Badge = styled.span`
 	font-size: 0.8rem;
 	font-weight: 500;
 `
-export { Article, Header, Image, User, Buttons, Content, Score, ScoreBtn, LinkBtn, Badge }
+export { Header, Image, User, Buttons, Content, ContentUpdate, Score, ScoreBtn, LinkBtn, Badge }
 

@@ -2,7 +2,9 @@ import { useContext, useState, useEffect } from 'react'
 import { Context } from '../lib/Context'
 import Fetcher from '../lib/fetcher'
 import { getNextId, getComments } from '../lib/utils'
-import { Section, Image, Form, TextArea, Button } from './commentFormStyles'
+import { Section, Image, Form, TextArea } from './commentFormStyles'
+import Button from './Button'
+import FormWrapper from './formStyles'
 
 export default function CommentForm() {
 	const { currentUser, comments, setComments, reply, setReply } = useContext(Context)
@@ -65,11 +67,11 @@ export default function CommentForm() {
 
 	return (
 		<Section>
-			<Form onSubmit={reply ? replyComment : postComment}>
+			<FormWrapper onSubmit={reply ? replyComment : postComment}>
 				<Image src={currentUser?.image.webp} alt={currentUser?.username} />
 				<TextArea onChange={handleChange} value={`${replyTo}${comment}`} />
 				<Button>{reply ? 'REPLY' : 'SEND'}</Button>
-			</Form>
+			</FormWrapper>
 		</Section>
 	)
 }

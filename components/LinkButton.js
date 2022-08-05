@@ -2,7 +2,7 @@ import LinkBtn from './linkBtnStyles'
 
 export default function LinkButton(props) {
 	return (
-		<LinkBtn onClick={props.handler} primary={props.primary}>
+		<LinkBtn {...props}>
 			{props.action === 'reply' && (
 				<>
 					<svg width='14' height='13' xmlns='http://www.w3.org/2000/svg'>

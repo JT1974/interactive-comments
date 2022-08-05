@@ -9,7 +9,7 @@ import Comments from '../components/Comments'
 import Modal from '../components/Modal'
 
 export default function Home({ data }) {
-	const { setCurrentUser, setComments, reply, del } = useContext(Context)
+	const { setCurrentUser, setComments, reply, edit, del } = useContext(Context)
 
 	useEffect(() => {
 		setCurrentUser(data.currentUser)
@@ -31,7 +31,7 @@ export default function Home({ data }) {
 
 			<main className={styles.main}>
 				<Comments />
-				{!reply && <CommentForm />}
+				{!reply && !edit && <CommentForm />}
 			</main>
 			{del && <Modal />}
 		</div>

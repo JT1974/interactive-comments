@@ -17,7 +17,7 @@ export default function Comments() {
 						<Fragment key={comment.id}>
 							<Comment comment={comment} />
 							{reply && reply.commentId === comment.id && <CommentForm />}
-							{comment.replies.length !== 0 && <Replies parent={comment.id} comments={comment.replies} />}
+							{comment.replies?.length !== 0 && <Replies parent={comment} />}
 						</Fragment>
 					)
 				})

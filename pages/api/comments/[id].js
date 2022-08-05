@@ -5,9 +5,6 @@ export default async function handler(req, res) {
 	// TODO: megtisztítani az inputot, nehogy scriptet küldjenek
 	const { id } = req.query
 
-	// NOTE: ha replies tömbbeli az id, akkor így nem találja meg
-	// meg kell nézni, hogy mi a legfelsőbb szintű felmenője és azt kell update-elni!!!
-
 	const response = await fetch(`http://localhost:3001/comments/${id}`, {
 		method: req.method,
 		headers: {
