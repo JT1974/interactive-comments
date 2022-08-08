@@ -31,7 +31,9 @@ const ButtonWrapper = styled.button.attrs(() => ({
 		border: none;
 		background: transparent;
 		display: flex;
+		align-items: center;
 		padding: 0.75rem 1rem;
+		height: 100%;
 
 		path {
 			fill: var(--lightGrayishBlue);

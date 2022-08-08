@@ -10,7 +10,6 @@ import Score from './Score'
 export default function Comment({ comment: commentObj, parent }) {
 	const { currentUser, setReply, setDel, edit, setEdit, updateComment } = useContext(Context)
 	const [comment, setComment] = useState(null)
-
 	const {
 		id,
 		user: {
@@ -56,7 +55,7 @@ export default function Comment({ comment: commentObj, parent }) {
 
 	return (
 		<Article data-comment-id={id}>
-			<Score handler={updateComment} comment={commentObj} parent={parent} />
+			<Score handler={currentUser.username !== username && updateComment} comment={commentObj} parent={parent} />
 			<Header>
 				<Image src={image} alt={username} />
 				<User username={username} isUser={isUser} />
