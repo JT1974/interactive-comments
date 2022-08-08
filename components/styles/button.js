@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import ArticleWrapper from './article'
 import FormWrapper from './form'
+import ScoreWrapper from './score'
 const ButtonWrapper = styled.button.attrs(() => ({
 	type: 'submit',
 }))`
@@ -24,6 +25,23 @@ const ButtonWrapper = styled.button.attrs(() => ({
 
 	${ArticleWrapper} & {
 		grid-area: 3/3/4/4;
+	}
+
+	${ScoreWrapper} & {
+		border: none;
+		background: transparent;
+		display: flex;
+		padding: 0.75rem 1rem;
+
+		path {
+			fill: var(--lightGrayishBlue);
+		}
+
+		&:hover {
+			path {
+				fill: var(--moderateBlue);
+			}
+		}
 	}
 `
 export default ButtonWrapper

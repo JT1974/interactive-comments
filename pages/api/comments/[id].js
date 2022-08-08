@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: req.body && JSON.stringify({ ...req.body }),
+		body: req.body && JSON.stringify(req.body),
 	})
 
 	const comments = await response.json()

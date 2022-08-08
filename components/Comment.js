@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react'
 import { Context } from '../lib/Context'
 import LinkButton from './LinkButton'
-import { Header, Image, Buttons, Content, ContentUpdate, Score, ScoreBtn } from './styles/comment'
+import { Header, Image, Buttons, Content, ContentUpdate } from './styles/comment'
 import Button from './Button'
 import Article from './Article'
 import User from './User'
+import Score from './Score'
 
 export default function Comment({ comment: commentObj, parent }) {
 	const { currentUser, setReply, setDel, edit, setEdit, updateComment } = useContext(Context)
@@ -12,7 +13,6 @@ export default function Comment({ comment: commentObj, parent }) {
 
 	const {
 		id,
-		score,
 		user: {
 			username,
 			image: { webp: image },
@@ -47,23 +47,16 @@ export default function Comment({ comment: commentObj, parent }) {
 	const setCommentEdit = () => setEdit({ commentId: id })
 	const setCommentDelete = () => setDel({ commentId: id })
 
-	const setUpdateComment = async event => {
+	const updateCommentText = event => {
 		event.preventDefault()
-		updateComment(commentObj, parent, comment)
+		updateComment({ ...commentObj, content: comment }, parent)
 		setComment(null)
+		setEdit(null)
 	}
 
 	return (
 		<Article data-comment-id={id}>
-			<Score>
-				<ScoreBtn>
-					<img src='./images/icon-plus.svg' alt='upvote' />
-				</ScoreBtn>
-				{score}
-				<ScoreBtn>
-					<img src='./images/icon-minus.svg' alt='downvote' />
-				</ScoreBtn>
-			</Score>
+			<Score handler={updateComment} comment={commentObj} parent={parent} />
 			<Header>
 				<Image src={image} alt={username} />
 				<User username={username} isUser={isUser} />
@@ -71,7 +64,7 @@ export default function Comment({ comment: commentObj, parent }) {
 			</Header>
 			{isEdited ? (
 				<>
-					<Button onClick={setUpdateComment}>UPDATE</Button>
+					<Button onClick={updateCommentText}>UPDATE</Button>
 					<ContentUpdate
 						id='updateContainer'
 						value={replyPrefix.concat(comment)}

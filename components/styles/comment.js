@@ -55,28 +55,6 @@ const ContentUpdate = styled.textarea.attrs(() => ({
 		cursor: text;
 	}
 `
-const Score = styled.div`
-	grid-area: 3/1/4/2;
-	width: max-content;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-	color: var(--moderateBlue);
-	font-weight: 500;
-	background: var(--lightGray);
-	padding: 0.5rem 1rem;
-	border-radius: 0.5rem;
-`
-const ScoreBtn = styled.button`
-	border: none;
-	background: transparent;
-	display: flex;
-
-	img:hover + path {
-		fill: var(--moderateBlue);
-	}
-`
 const LinkBtn = styled.button`
 	border: none;
 	background: transparent;
@@ -99,5 +77,5 @@ const LinkBtn = styled.button`
 		}
 	}
 `
-export { Header, Image, Buttons, Content, ContentUpdate, Score, ScoreBtn, LinkBtn }
+export { Header, Image, Buttons, Content, ContentUpdate, LinkBtn }
 
