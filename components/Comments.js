@@ -12,15 +12,17 @@ export default function Comments() {
 	return (
 		<Section id='comments'>
 			{comments ? (
-				comments.map(comment => {
-					return (
-						<Fragment key={comment.id}>
-							<Comment comment={comment} />
-							{reply && reply.commentId === comment.id && <CommentForm />}
-							{comment.replies?.length !== 0 && <Replies parent={comment} />}
-						</Fragment>
-					)
-				})
+				comments
+					.sort((a, b) => b.score - a.score)
+					.map(comment => {
+						return (
+							<Fragment key={comment.id}>
+								<Comment comment={comment} />
+								{reply && reply.commentId === comment.id && <CommentForm />}
+								{comment.replies?.length !== 0 && <Replies parent={comment} />}
+							</Fragment>
+						)
+					})
 			) : (
 				<Spinner />
 			)}
