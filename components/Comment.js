@@ -6,6 +6,7 @@ import Button from './Button'
 import Article from './Article'
 import User from './User'
 import Score from './Score'
+import { format } from 'timeago.js'
 
 export default function Comment({ comment: commentObj, parent }) {
 	const { currentUser, setReply, setDel, edit, setEdit, updateComment } = useContext(Context)
@@ -23,6 +24,7 @@ export default function Comment({ comment: commentObj, parent }) {
 	const isUser = username === currentUser.username
 	const isEdited = edit?.commentId === id
 	const replyPrefix = replyingTo ? `@${replyingTo}, ` : ``
+	const timeAgo = format(createdAt)
 
 	/* if comment is edited sets focus on the text */
 	useEffect(() => {
@@ -59,7 +61,7 @@ export default function Comment({ comment: commentObj, parent }) {
 			<Header>
 				<Image src={image} alt={username} />
 				<User username={username} isUser={isUser} />
-				<span>{createdAt}</span>
+				<span>{timeAgo}</span>
 			</Header>
 			{isEdited ? (
 				<>
