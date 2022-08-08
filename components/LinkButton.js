@@ -1,4 +1,4 @@
-import LinkBtn from './linkBtnStyles'
+import LinkBtn from './styles/linkButton'
 
 export default function LinkButton(props) {
 	return (

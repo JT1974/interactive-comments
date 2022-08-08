@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react'
 import { Context } from '../lib/Context'
-import { Section } from './commentsStyles'
+import { Section } from './styles/comments'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
 import Replies from './Replies'

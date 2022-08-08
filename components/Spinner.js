@@ -1,4 +1,4 @@
-import { Container, Loader, Tick, Loading } from './spinnerStyles'
+import { Container, Loader, Tick, Loading } from './styles/spinner'
 
 export default function Spinner({ color = 'darkorange' }) {
 	const tickNum = 8

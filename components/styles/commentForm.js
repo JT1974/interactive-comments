@@ -4,12 +4,6 @@ const Section = styled.section`
 	border-radius: 0.5rem;
 	padding: 1rem;
 `
-const Form = styled.form`
-	display: grid;
-	justify-content: space-between;
-	align-items: end;
-	row-gap: 1rem;
-`
 const Image = styled.img`
 	width: 2rem;
 	grid-area: 2/1/3/2;
@@ -45,5 +39,5 @@ const TextArea = styled.textarea.attrs(() => ({
 		cursor: text;
 	}
 `
-export { Section, Image, Form, TextArea }
+export { Section, Image, TextArea }
 

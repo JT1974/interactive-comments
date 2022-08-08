@@ -39,7 +39,7 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
-	const data = await Fetcher('http://localhost:3001/db')
+	const data = await Fetcher(`${process.env.DB_URL}db/`)
 
 	return {
 		props: { data },

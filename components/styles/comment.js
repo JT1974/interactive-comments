@@ -13,13 +13,6 @@ const Image = styled.img`
 		width: 2.5rem;
 	}
 `
-const User = styled.div`
-	font-weight: 500;
-	color: var(--darkBlue);
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-`
 const Buttons = styled.div`
 	grid-area: 3/3/4/4;
 	display: flex;
@@ -106,13 +99,5 @@ const LinkBtn = styled.button`
 		}
 	}
 `
-const Badge = styled.span`
-	padding: 0 6px 4px;
-	border-radius: 2px;
-	background: var(--moderateBlue);
-	color: var(--white);
-	font-size: 0.8rem;
-	font-weight: 500;
-`
-export { Header, Image, User, Buttons, Content, ContentUpdate, Score, ScoreBtn, LinkBtn, Badge }
+export { Header, Image, Buttons, Content, ContentUpdate, Score, ScoreBtn, LinkBtn }
 

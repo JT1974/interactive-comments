@@ -2,7 +2,7 @@ import { Fragment, useContext } from 'react'
 import { Context } from '../lib/Context'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
-import StyledSection from './replyStyles'
+import StyledSection from './styles/replies'
 
 export default function Replies({ parent }) {
 	const { reply } = useContext(Context)

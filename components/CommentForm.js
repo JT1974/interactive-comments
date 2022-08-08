@@ -2,9 +2,9 @@ import { useContext, useState, useEffect } from 'react'
 import { Context } from '../lib/Context'
 import Fetcher from '../lib/fetcher'
 import { getNextId, getComments } from '../lib/utils'
-import { Section, Image, Form, TextArea } from './commentFormStyles'
+import { Section, Image, TextArea } from './styles/commentForm'
 import Button from './Button'
-import FormWrapper from './formStyles'
+import FormWrapper from './styles/form'
 
 export default function CommentForm() {
 	const { currentUser, comments, setComments, reply, setReply } = useContext(Context)

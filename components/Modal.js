@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Context } from '../lib/Context'
-import { ModalWindow, ModalInner, Title, Para, Button } from './modalStyles'
+import { ModalWindow, ModalInner, Title, Para, Button } from './styles/modal'
 import Fetcher from '../lib/fetcher'
 
 export default function Modal() {

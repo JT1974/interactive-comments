@@ -2,7 +2,7 @@
 export default async function handler(req, res) {
 	// TODO: megtisztítani az inputot, nehogy scriptet küldjenek
 
-	const response = await fetch('http://localhost:3001/comments', {
+	const response = await fetch(`${process.env.DB_URL}comments/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

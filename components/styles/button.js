@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import ArticleWrapper from './articleStyles'
-import FormWrapper from './formStyles'
+import ArticleWrapper from './article'
+import FormWrapper from './form'
 const ButtonWrapper = styled.button.attrs(() => ({
 	type: 'submit',
 }))`
