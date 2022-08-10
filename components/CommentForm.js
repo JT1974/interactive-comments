@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Context } from '../lib/Context'
 import { getNextId, getComments } from '../lib/utils'
 import CommentFormWrapper from './styles/commentForm'
@@ -10,6 +10,13 @@ import Button from './Button'
 export default function CommentForm({ comment: commentObj, parent }) {
 	const { currentUser, comments, reply, postComment, updateComment } = useContext(Context)
 	const [comment, setComment] = useState('')
+
+	/* set focus on reply container */
+	useEffect(() => {
+		const text = document.getElementById('commentContainer')
+		reply && text.focus()
+		text?.setSelectionRange(text.value.length, text.value.length)
+	}, [reply])
 
 	/* comment prefix (e.g. @amyrobson) */
 	const prefix = reply ? `@${getComments(comments)?.find(cm => cm.id === +reply.comment.id).user.username}, ` : ''
@@ -50,7 +57,12 @@ export default function CommentForm({ comment: commentObj, parent }) {
 		<CommentFormWrapper>
 			<Form onSubmit={reply ? replyComment : saveComment}>
 				<Image src={currentUser?.image.webp} alt={currentUser?.username} />
-				<TextArea onChange={handleChange} value={prefix.concat(comment)} placeholder='Add a comment...' />
+				<TextArea
+					id='commentContainer'
+					onChange={handleChange}
+					value={prefix.concat(comment)}
+					placeholder='Add a comment...'
+				/>
 				<Button>{reply ? 'REPLY' : 'SEND'}</Button>
 			</Form>
 		</CommentFormWrapper>
