@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-const ModalWindow = styled.div`
+const ModalWrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
 	position: fixed;
@@ -43,5 +43,5 @@ const Button = styled.button`
 		background: ${props => (props.primary ? 'var(--darkBlue)' : 'var(--paleRed)')};
 	}
 `
-export { ModalWindow, ModalInner, Title, Para, Button }
+export { ModalWrapper, ModalInner, Title, Para, Button }
 

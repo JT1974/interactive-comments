@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react'
 import { Context } from '../lib/Context'
-import { Section } from './styles/comments'
+import CommentsWrapper from './styles/comments'
 import Comment from './Comment'
 import CommentForm from './CommentForm'
 import Replies from './Replies'
@@ -10,7 +10,7 @@ export default function Comments() {
 	const { comments, reply } = useContext(Context)
 
 	return (
-		<Section id='comments'>
+		<CommentsWrapper>
 			{comments ? (
 				comments
 					.sort((a, b) => b.score - a.score)
@@ -18,7 +18,7 @@ export default function Comments() {
 						return (
 							<Fragment key={comment.id}>
 								<Comment comment={comment} />
-								{reply && reply.commentId === comment.id && <CommentForm />}
+								{reply?.comment === comment && <CommentForm comment={comment} parent={comment} />}
 								{comment.replies?.length !== 0 && <Replies parent={comment} />}
 							</Fragment>
 						)
@@ -26,7 +26,7 @@ export default function Comments() {
 			) : (
 				<Spinner />
 			)}
-		</Section>
+		</CommentsWrapper>
 	)
 }
 

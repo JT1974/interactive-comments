@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-const Container = styled.div`
+const SpinnerWrapper = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -64,5 +64,5 @@ const Loading = styled.span`
 		}
 	}
 `
-export { Container, Loader, Tick, Loading }
+export { SpinnerWrapper, Loader, Tick, Loading }
 

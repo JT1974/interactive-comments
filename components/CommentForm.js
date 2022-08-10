@@ -1,78 +1,59 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { Context } from '../lib/Context'
-import Fetcher from '../lib/fetcher'
 import { getNextId, getComments } from '../lib/utils'
-import { Section, Image, TextArea } from './styles/commentForm'
+import CommentFormWrapper from './styles/commentForm'
+import Form from './form'
+import Image from './Image'
+import TextArea from './TextArea'
 import Button from './Button'
-import FormWrapper from './styles/form'
 
-export default function CommentForm() {
-	const { currentUser, comments, setComments, reply, setReply } = useContext(Context)
+export default function CommentForm({ comment: commentObj, parent }) {
+	const { currentUser, comments, reply, postComment, updateComment } = useContext(Context)
 	const [comment, setComment] = useState('')
 
-	// if it's a reply (it has parentId & commentId), insert the original comment's username to the beginning of the reply
-	const replyTo = reply ? `@${getComments(comments)?.find(cm => cm.id === +reply.commentId).user.username}, ` : ''
+	/* comment prefix (e.g. @amyrobson) */
+	const prefix = reply ? `@${getComments(comments)?.find(cm => cm.id === +reply.comment.id).user.username}, ` : ''
 
-	const handleChange = event => {
-		const cmtWoReplyTo = event.target.value.slice(replyTo.length)
-		setComment(cmtWoReplyTo)
-	}
+	/* controlled component - remove the @replyingTo prefix before saving the text */
+	const handleChange = event => setComment(event.target.value.slice(prefix.length))
 
-	// save comment document to the comments collection of the database
-	const postComment = async event => {
+	/* post comment === create a new (TOP LEVEL) comment */
+	const saveComment = async event => {
 		event.preventDefault()
 
-		const data = await Fetcher('/api/', 'POST', {
-			id: getNextId(comments),
-			content: comment,
-			createdAt: '1 month ago',
-			score: 0,
-			user: currentUser,
-			replies: [],
-		})
-
+		postComment(comment)
 		setComment('')
-		setComments(prevComments => [...prevComments, data])
 	}
 
-	// add the comment to the replies array of the parent comment
+	/* reply to comment === update the parent object */
 	const replyComment = async event => {
 		event.preventDefault()
 
-		const parent = comments.find(cmt => cmt.id === +reply.parentId)
-		const replyingTo = getComments(comments).find(cmt => cmt.id === +reply.commentId).user.username
-
-		const data = await Fetcher(`/api/comments/${+reply.parentId}`, 'PATCH', {
+		updateComment({
 			...parent,
 			replies: [
 				...parent.replies,
 				{
 					id: getNextId(comments),
 					content: comment,
-					createdAt: '1 minute ago',
+					createdAt: Date.now(),
 					score: 0,
-					replyingTo,
+					replyingTo: commentObj.user.username,
 					user: currentUser,
 				},
 			],
 		})
-
-		setReply(null)
 		setComment('')
-		setComments(prevComments => {
-			const parentIdx = prevComments.findIndex(com => com.id === parent.id)
-			return [...prevComments.slice(0, parentIdx), data, ...prevComments.slice(parentIdx + 1)]
-		})
 	}
 
 	return (
-		<Section>
-			<FormWrapper onSubmit={reply ? replyComment : postComment}>
+		<CommentFormWrapper>
+			<Form onSubmit={reply ? replyComment : saveComment}>
 				<Image src={currentUser?.image.webp} alt={currentUser?.username} />
-				<TextArea onChange={handleChange} value={`${replyTo}${comment}`} />
+				<TextArea onChange={handleChange} value={prefix.concat(comment)} placeholder='Add a comment...' />
 				<Button>{reply ? 'REPLY' : 'SEND'}</Button>
-			</FormWrapper>
-		</Section>
+			</Form>
+		</CommentFormWrapper>
 	)
 }
 

@@ -1,4 +1,4 @@
-import { Container, Loader, Tick, Loading } from './styles/spinner'
+import { SpinnerWrapper, Loader, Tick, Loading } from './styles/spinner'
 
 export default function Spinner({ color = 'darkorange' }) {
 	const tickNum = 8
@@ -6,10 +6,10 @@ export default function Spinner({ color = 'darkorange' }) {
 	const spinner = ticks.map((tick, idx) => <Tick key={idx} index={idx} count={tickNum} color={color} />)
 
 	return (
-		<Container>
+		<SpinnerWrapper>
 			<Loader count={tickNum}>{spinner}</Loader>
 			<Loading color={color}>Loading...</Loading>
-		</Container>
+		</SpinnerWrapper>
 	)
 }
 

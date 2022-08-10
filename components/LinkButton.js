@@ -1,8 +1,8 @@
-import LinkBtn from './styles/linkButton'
+import LinkButtonWrapper from './styles/linkButton'
 
 export default function LinkButton(props) {
 	return (
-		<LinkBtn {...props}>
+		<LinkButtonWrapper {...props}>
 			{props.action === 'reply' && (
 				<>
 					<svg width='14' height='13' xmlns='http://www.w3.org/2000/svg'>
@@ -27,7 +27,7 @@ export default function LinkButton(props) {
 					Delete
 				</>
 			)}
-		</LinkBtn>
+		</LinkButtonWrapper>
 	)
 }
 

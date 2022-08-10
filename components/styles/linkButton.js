@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const LinkBtn = styled.button`
+const LinkButtonWrapper = styled.button`
 	border: none;
 	background: transparent;
 	color: ${props => (props.primary ? 'var(--moderateBlue)' : 'var(--softRed)')};
@@ -23,5 +23,5 @@ const LinkBtn = styled.button`
 		}
 	}
 `
-export default LinkBtn
+export default LinkButtonWrapper
 

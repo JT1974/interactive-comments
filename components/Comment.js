@@ -1,16 +1,21 @@
 import { useState, useEffect, useContext } from 'react'
 import { Context } from '../lib/Context'
-import LinkButton from './LinkButton'
-import { Header, Image, Buttons, Content, ContentUpdate } from './styles/comment'
-import Button from './Button'
-import Article from './Article'
-import User from './User'
+import CommentWrapper from './styles/comment'
 import Score from './Score'
-import { format } from 'timeago.js'
+import CommentHeader from './CommentHeader'
+import Image from './Image'
+import User from './User'
+import Date from './Date'
+import Button from './Button'
+import TextArea from './TextArea'
+import LinkButtons from './linkButtons'
+import LinkButton from './LinkButton'
+import Content from './Content'
 
 export default function Comment({ comment: commentObj, parent }) {
 	const { currentUser, setReply, setDel, edit, setEdit, updateComment } = useContext(Context)
-	const [comment, setComment] = useState(null)
+	const [newContent, setNewContent] = useState('')
+
 	const {
 		id,
 		user: {
@@ -22,75 +27,61 @@ export default function Comment({ comment: commentObj, parent }) {
 		content,
 	} = commentObj
 	const isUser = username === currentUser.username
-	const isEdited = edit?.commentId === id
-	const replyPrefix = replyingTo ? `@${replyingTo}, ` : ``
-	const timeAgo = format(createdAt)
+	const isEdited = edit === commentObj
+	const prefix = replyingTo ? `@${replyingTo}, ` : ``
 
-	/* if comment is edited sets focus on the text */
+	/* set new content and set focus on its container */
 	useEffect(() => {
 		const text = document.getElementById('updateContainer')
-
-		/* setting the comment for the controlled component*/
-		setComment(content)
-
-		/* set focus on textarea */
+		setNewContent(content)
 		isEdited && text.focus()
-
-		/* move cursor to end of text */
 		text?.setSelectionRange(text.value.length, text.value.length)
 	}, [edit])
 
-	/* controlled component - removes the @replyingTo prefix before saving the text */
-	const handleChange = event =>
-		replyPrefix ? setComment(event.target.value.split(replyPrefix)[1] || '') : setComment(event.target.value)
+	/* controlled component - remove the @replyingTo prefix before saving the text */
+	const handleChange = event => setNewContent(event.target.value.slice(prefix.length))
 
-	const setCommentReply = () => setReply({ parentId: parent?.id || id, commentId: id })
-	const setCommentEdit = () => setEdit({ commentId: id })
-	const setCommentDelete = () => setDel({ commentId: id })
-
-	const updateCommentText = event => {
+	/* update comment === update currentuser's own comment - including replies */
+	const updateContent = event => {
 		event.preventDefault()
-		updateComment({ ...commentObj, content: comment }, parent)
-		setComment(null)
-		setEdit(null)
+
+		updateComment({ ...commentObj, content: newContent }, parent)
+		setNewContent('')
 	}
 
 	return (
-		<Article data-comment-id={id}>
+		<CommentWrapper data-comment-id={id}>
 			<Score handler={currentUser.username !== username && updateComment} comment={commentObj} parent={parent} />
-			<Header>
+			<CommentHeader>
 				<Image src={image} alt={username} />
 				<User username={username} isUser={isUser} />
-				<span>{timeAgo}</span>
-			</Header>
+				<Date date={createdAt} />
+			</CommentHeader>
 			{isEdited ? (
 				<>
-					<Button onClick={updateCommentText}>UPDATE</Button>
-					<ContentUpdate
-						id='updateContainer'
-						value={replyPrefix.concat(comment)}
-						onChange={handleChange}
-					></ContentUpdate>
+					<Button onClick={updateContent}>UPDATE</Button>
+					<TextArea id='updateContainer' value={prefix.concat(newContent)} onChange={handleChange} />
 				</>
 			) : (
 				<>
-					<Buttons>
+					<LinkButtons>
 						{isUser ? (
 							<>
-								<LinkButton onClick={setCommentDelete} action='delete' />
-								<LinkButton onClick={setCommentEdit} primary action='edit' />
+								<LinkButton onClick={() => setDel({ comment: commentObj, parent })} action='delete' />
+								<LinkButton onClick={() => setEdit(commentObj)} primary action='edit' />
 							</>
 						) : (
-							<LinkButton onClick={setCommentReply} primary action='reply' />
+							<LinkButton
+								onClick={() => setReply({ comment: commentObj, parent })}
+								primary
+								action='reply'
+							/>
 						)}{' '}
-					</Buttons>
-					<Content>
-						<span>{replyPrefix}</span>
-						{content}
-					</Content>
+					</LinkButtons>
+					<Content prefix={prefix} content={content} />
 				</>
 			)}
-		</Article>
+		</CommentWrapper>
 	)
 }
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ArticleWrapper from './article'
+import CommentWrapper from './comment'
 import FormWrapper from './form'
 import ScoreWrapper from './score'
 const ButtonWrapper = styled.button.attrs(() => ({
@@ -23,7 +23,7 @@ const ButtonWrapper = styled.button.attrs(() => ({
 		grid-area: 2/2/3/3;
 	}
 
-	${ArticleWrapper} & {
+	${CommentWrapper} & {
 		grid-area: 3/3/4/4;
 	}
 

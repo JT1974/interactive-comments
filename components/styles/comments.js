@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-
-const Section = styled.section`
+const CommentsWrapper = styled.section.attrs(() => {
+	id: 'comments'
+})`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	gap: 1rem;
 `
-
-export { Section }
+export default CommentsWrapper
 

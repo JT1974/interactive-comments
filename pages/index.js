@@ -39,7 +39,18 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
+	// 1. does the user have a key in the local storage?
+
+	// 2. load / create one
+
+	// 3. if loaded, load the corresponding database TODO update below code
 	const data = await Fetcher(`${process.env.DB_URL}db/`)
+
+	// 4. if created, save the key to the local storage
+
+	// 5. if created, load the original database
+
+	// 6. if created, first time, when the user saves anything, save the whole database under the new key (if database does not exist with that key, create it with the whole content, otherwise just update it) --> do it on the first change, and not automatically at the start, because the user may not even bother changing anything
 
 	return {
 		props: { data },

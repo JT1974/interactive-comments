@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const StyledSection = styled.section`
+const RepliesWrapper = styled.section`
 	padding-left: 1rem;
 	border-left: 1px solid var(--lightGray);
 	display: flex;
@@ -13,5 +13,5 @@ const StyledSection = styled.section`
 		padding-left: 2rem;
 	}
 `
-export default StyledSection
+export default RepliesWrapper
 
