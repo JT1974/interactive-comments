@@ -8,7 +8,7 @@ import TextArea from './TextArea'
 import Button from './Button'
 
 export default function CommentForm({ comment: commentObj, parent }) {
-	const { currentUser, comments, reply, postComment, updateComment } = useContext(Context)
+	const { commentId, setCommentId, currentUser, comments, reply, postComment, updateComment } = useContext(Context)
 	const [comment, setComment] = useState('')
 
 	/* set focus on reply container */
@@ -41,7 +41,7 @@ export default function CommentForm({ comment: commentObj, parent }) {
 			replies: [
 				...parent.replies,
 				{
-					id: getNextId(comments),
+					id: commentId,
 					content: comment,
 					createdAt: Date.now(),
 					score: 0,
@@ -50,6 +50,11 @@ export default function CommentForm({ comment: commentObj, parent }) {
 				},
 			],
 		})
+
+		// set next available comment id in state
+		setCommentId(commentId + 1)
+
+		// empty comment container
 		setComment('')
 	}
 
