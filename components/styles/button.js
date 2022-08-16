@@ -45,6 +45,12 @@ const ButtonWrapper = styled.button.attrs(() => ({
 			}
 		}
 	}
+
+	@media (min-width: 40rem) {
+		${FormWrapper} & {
+			grid-area: 1/3/2/4;
+		}
+	}
 `
 export default ButtonWrapper
 

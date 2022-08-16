@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import CommentFormWrapper from './commentForm'
 import CommentWrapper from './comment'
+import FormWrapper from './form'
 const TextAreaWrapper = styled.textarea.attrs(props => ({
 	...props,
 }))`
@@ -32,6 +33,16 @@ const TextAreaWrapper = styled.textarea.attrs(props => ({
 
 	&:focus {
 		cursor: text;
+	}
+
+	@media (min-width: 40rem) {
+		${CommentWrapper} & {
+			grid-area: 2/2/3/4;
+		}
+
+		${FormWrapper} & {
+			grid-area: 1/2/3/3;
+		}
 	}
 `
 export default TextAreaWrapper

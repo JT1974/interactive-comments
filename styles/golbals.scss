@@ -21,19 +21,21 @@
 	--attribution-font-family: 'Rubik', sans-serif;
 	--attribution-text-color: hsl(211, 10%, 45%);
 	--attribution-link-color: hsl(238, 40%, 52%);
+
+	/* comment wrapper */
+	--comment-max-width: 45rem;
 }
 
-html,
-body {
+html {
 	background: var(--veryLightGray);
+	font-family: var(--primaryFont);
+	font-size: 16px;
+	font-weight: 400;
 }
 
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: var(--primaryFont);
-	font-size: 16px;
-	font-weight: 400;
 }
 

@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import { Context } from '../lib/Context'
-import { getNextId, getComments } from '../lib/utils'
+import { getComments } from '../lib/utils'
 import CommentFormWrapper from './styles/commentForm'
 import Form from './form'
 import Image from './Image'
