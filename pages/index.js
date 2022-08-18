@@ -14,9 +14,9 @@ import { getNextId } from '../lib/utils'
 export default function Home({ data }) {
 	const [loaded, setLoaded] = useState(false)
 	const {
+		getUserId,
 		setCommentId,
 		userId,
-		setUserId,
 		currentUser,
 		setCurrentUser,
 		comments,
@@ -26,28 +26,6 @@ export default function Home({ data }) {
 		edit,
 		del,
 	} = useContext(Context)
-
-	// get/create user id
-	const getUserId = () => {
-		// load user id from local storage
-		let uId = localStorage.getItem('iac')
-
-		// if no id in local storage
-		if (!uId) {
-			const nanoid = customAlphabet('1234567890abcdef', 12)
-
-			// create user id
-			uId = nanoid()
-
-			// save it to local storage
-			localStorage.setItem('iac', uId)
-		}
-
-		// set state variable
-		setUserId(uId)
-
-		return uId
-	}
 
 	// get user data from database (or an empty array)
 	const getUserFromDb = id => data.comments.filter(comment => comment.userId === id)
@@ -91,36 +69,57 @@ export default function Home({ data }) {
 		}
 
 		// set next available comment id in state
-		setCommentId(getNextId(data.comments))
+		// setCommentId(getNextId(data.comments))
 
 		return userComments
 	}
 
 	// save current user in state
-	useEffect(() => setCurrentUser(data.currentUser), [])
+	// useEffect(() => setCurrentUser(data.currentUser), [])
 
 	// save user comments in state
 	useEffect(() => {
-		// get user id
-		const uId = getUserId()
+		if (comments.length === 0) {
+			// get user id
+			const uId = getUserId()
 
-		// get user data
-		const userComments = getUserComments(uId)
+			// get user data
+			const userComments = getUserComments(uId)
 
-		// set user comments
-		setComments(userComments)
+			// save current user in state
+			setCurrentUser(data.currentUser)
+
+			// set user comments
+			if (userInDb(uId)) {
+				setComments([...data.comments])
+			} else {
+				// if the user is not saved to the database yet, save it (comments only)
+				postUser(userComments)
+
+				setComments([...data.comments, ...userComments])
+			}
+
+			// set loaded state
+			setLoaded(true)
+		}
 	}, [])
 
 	// save new user data in database
 	useEffect(() => {
 		// if the user is not saved to the database yet, save it (comments only)
-		if (currentUser && !userInDb(userId)) postUser()
+		if (currentUser && !userInDb(userId)) {
+			//postUser()
+			//DEBUG
+			// console.log('user should be posted now')
+		}
 	}, [currentUser])
 
 	// set loaded state
 	useEffect(() => {
-		// turn off loaded state
-		comments && setLoaded(true)
+		// comments && setLoaded(true)
+
+		// set next available comment id in state
+		setCommentId(getNextId(comments))
 	}, [comments])
 
 	return (
@@ -137,8 +136,11 @@ export default function Home({ data }) {
 			</header>
 
 			<main className={styles.main}>
-				{!loaded ? <Spinner /> : <Comments />}
-				{loaded && !reply && !edit && <CommentForm />}
+				<Comments />
+				{!reply && !edit && <CommentForm />}
+				{!loaded && <Spinner />}
+				{/* {!loaded ? <Spinner /> : <Comments />}
+				{loaded && !reply && !edit && <CommentForm />} */}
 			</main>
 			{del && <Modal />}
 		</div>

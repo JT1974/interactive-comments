@@ -1,5 +1,7 @@
 import styled from 'styled-components'
-const CommentWrapper = styled.article`
+const CommentWrapper = styled.article.attrs(() => ({
+	height: '10rem',
+}))`
 	display: grid;
 	justify-content: space-between;
 	align-items: start;
@@ -7,6 +9,8 @@ const CommentWrapper = styled.article`
 	background: var(--white);
 	border-radius: 0.5rem;
 	padding: 1rem;
+	min-height: 10rem;
+	height: auto;
 
 	@media (min-width: 40rem) {
 		padding: 1.5rem;
