@@ -26,7 +26,7 @@ export default function Comment({ comment: commentObj, parent }) {
 		replyingTo,
 		content,
 	} = commentObj
-	const isUser = username === currentUser.username
+	const isUser = username === currentUser?.username
 	const isEdited = edit === commentObj
 	const prefix = replyingTo ? `@${replyingTo}, ` : ``
 
@@ -51,7 +51,7 @@ export default function Comment({ comment: commentObj, parent }) {
 
 	return (
 		<CommentWrapper data-comment-id={id}>
-			<Score handler={currentUser.username !== username && updateComment} comment={commentObj} parent={parent} />
+			<Score handler={!isUser && updateComment} comment={commentObj} parent={parent} />
 			<CommentHeader>
 				<Image src={image} alt={username} />
 				<User username={username} isUser={isUser} />
